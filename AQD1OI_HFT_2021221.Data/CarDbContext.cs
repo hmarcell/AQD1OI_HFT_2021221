@@ -20,9 +20,9 @@ namespace AQD1OI_HFT_2021221.Data
             this.Database.EnsureCreated();
         }
 
-        public virtual DbSet<Car> Car { get; set; }
-        public virtual DbSet<Brand> Brand { get; set; }
-        public virtual DbSet<Rental> Rental { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Rental> Rentals { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
