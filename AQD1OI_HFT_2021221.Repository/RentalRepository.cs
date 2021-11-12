@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Repository
 {
-    class RentalRepository : IRentalRepository
+    public class RentalRepository : IRentalRepository
     {
         CarDbContext DbContext;
         public RentalRepository(CarDbContext DbContext)

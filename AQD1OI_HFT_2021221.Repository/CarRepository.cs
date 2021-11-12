@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Repository
 {
-    class CarRepository : ICarRepository
+    public class CarRepository : ICarRepository
     {
         CarDbContext DbContext;
         public CarRepository(CarDbContext DbContext)
