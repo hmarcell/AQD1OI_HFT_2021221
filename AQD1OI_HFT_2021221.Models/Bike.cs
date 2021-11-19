@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Models
 {
-    [Table("cars")]
-    public class Car
+    [Table("bikes")]
+    public class Bike
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,7 +30,7 @@ namespace AQD1OI_HFT_2021221.Models
         [NotMapped]
         public virtual ICollection<Rental> Rentals { get; set; }
 
-        public Car()
+        public Bike()
         {
             Rentals = new HashSet<Rental>();
         }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Repository
 {
-    public interface ICarRepository
+    public interface IBikeRepository
     {
-        public void Create(Car car);
-        public Car Read(int id);
-        public void Update(Car car);
+        public void Create(Bike bike);
+        public Bike Read(int id);
+        public void Update(Bike bike);
         public void Delete(int id);
-        public IQueryable<Car> ReadAll();
+        public IQueryable<Bike> ReadAll();
 
     }
 }

@@ -20,10 +20,10 @@ namespace AQD1OI_HFT_2021221.Models
         public string Name { get; set; }
 
         [NotMapped]
-        public virtual ICollection<Car> Cars { get; set; }
+        public virtual ICollection<Bike> Bikes { get; set; }
         public Brand()
         {
-            Cars = new HashSet<Car>();
+            Bikes = new HashSet<Bike>();
         }
     }
 }

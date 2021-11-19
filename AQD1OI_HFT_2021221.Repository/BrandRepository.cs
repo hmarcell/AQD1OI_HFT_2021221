@@ -10,8 +10,8 @@ namespace AQD1OI_HFT_2021221.Repository
 {
     public class BrandRepository : IBrandRepository
     {
-        CarDbContext DbContext;
-        public BrandRepository(CarDbContext DbContext)
+        BikeDbContext DbContext;
+        public BrandRepository(BikeDbContext DbContext)
         {
             this.DbContext = DbContext;
         }

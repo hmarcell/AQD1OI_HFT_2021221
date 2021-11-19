@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Repository
 {
-    public class RentalRepository : IRentalRepository
+    public class BikeRepository : IBikeRepository
     {
         BikeDbContext DbContext;
-        public RentalRepository(BikeDbContext DbContext)
+        public BikeRepository(BikeDbContext DbContext)
         {
             this.DbContext = DbContext;
         }
-        public void Create(Rental rental)
+        public void Create(Bike bike)
         {
-            DbContext.Rentals.Add(rental);
+            DbContext.Bikes.Add(bike);
             DbContext.SaveChanges();
         }
 
@@ -27,22 +27,22 @@ namespace AQD1OI_HFT_2021221.Repository
             DbContext.SaveChanges();
         }
 
-        public Rental Read(int id)
+        public Bike Read(int id)
         {
-            return DbContext.Rentals.FirstOrDefault(r => r.ID == id);
+            return DbContext.Bikes.FirstOrDefault(c => c.ID == id);
         }
 
-        public IQueryable<Rental> ReadAll()
+        public IQueryable<Bike> ReadAll()
         {
-            return DbContext.Rentals;
+            return DbContext.Bikes;
         }
 
-        public void Update(Rental rental)
+        public void Update(Bike bike)
         {
-            var old = Read(rental.ID);
-            old.Date = rental.Date;
-            old.Renter = rental.Renter;
-            old.BikeID = rental.BikeID;
+            var oldBike = Read(bike.ID);
+            oldBike.BrandID = bike.BrandID;
+            oldBike.Model = bike.Model;
+            oldBike.Price = bike.Price;
             DbContext.SaveChanges();
         }
     }

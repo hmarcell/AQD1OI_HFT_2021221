@@ -16,16 +16,16 @@ namespace AQD1OI_HFT_2021221.Models
         public int ID { get; set; }
 
         [Required]
-        public string Renter { get; set; }          //name of the person who rents the car
+        public string Renter { get; set; }          //name of the person who rents the bike
 
         [Required]
-        [ForeignKey(nameof(Car))]
-        public int CarID { get; set; }
+        [ForeignKey(nameof(Bike))]
+        public int BikeID { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
 
         [NotMapped]
-        public virtual Car Car { get; set; }
+        public virtual Bike Bike { get; set; }
     }
 }
