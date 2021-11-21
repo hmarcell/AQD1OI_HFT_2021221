@@ -18,7 +18,6 @@ namespace AQD1OI_HFT_2021221.Models
         [Required]
         public string Renter { get; set; }          //name of the person who rents the bike
 
-        [Required]
         [ForeignKey(nameof(Bike))]
         public int BikeID { get; set; }
 
