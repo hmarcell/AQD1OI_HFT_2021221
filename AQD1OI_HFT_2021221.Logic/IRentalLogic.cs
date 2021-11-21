@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Logic
 {
-    interface IRentalLogic
+    public interface IRentalLogic
     {
         void Create(Rental rental);
         Rental Read(int id);

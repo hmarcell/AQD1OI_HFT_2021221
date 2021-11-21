@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Logic
 {
-    interface IBikeLogic
+    public interface IBikeLogic
     {
         void Create(Bike bike);
         Bike Read(int id);
