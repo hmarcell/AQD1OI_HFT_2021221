@@ -59,16 +59,16 @@ namespace AQD1OI_HFT_2021221.Data
             Brand sprint = new Brand() { ID = 3, Name = "Sprint" };
             Brand cross = new Brand() { ID = 4, Name = "Cross" };
 
-            Bike merida1 = new Bike() { ID = 1, BrandID = merida.ID, Price = 350000, Model = "Merida Dual Thrust" };
-            Bike sprint1 = new Bike() { ID = 2, BrandID = sprint.ID, Price = 49000, Model = "Sprint Jaguar" };
-            Bike sprint2 = new Bike() { ID = 3, BrandID = sprint.ID, Price = 109000, Model = "Sprint Sirius Tempo" };
-            Bike csepel1 = new Bike() { ID = 4, BrandID = csepel.ID, Price = 69900, Model = "Csepel Budapest A" };
-            Bike csepel2 = new Bike() { ID = 5, BrandID = csepel.ID, Price = 90000, Model = "Csepel Landrider 28 (2020)" };
-            Bike csepel3 = new Bike() { ID = 6, BrandID = csepel.ID, Price = 80000, Model = "Csepel Budapest B" };
-            Bike cross1 = new Bike() { ID = 7, BrandID = cross.ID, Price = 235000, Model = "Cross Picnic" };
-            Bike cross2 = new Bike() { ID = 8, BrandID = cross.ID, Price = 245000, Model = "Cross Citerra" };
-            Bike cross3 = new Bike() { ID = 9, BrandID = cross.ID, Price = 275000, Model = "Cross Riviera" };
-            Bike cross4 = new Bike() { ID = 10, BrandID = cross.ID, Price = 250000, Model = "Cross Avalon" };
+            Bike merida1 = new Bike() { ID = 1, BrandID = merida.ID, Price = 35000, Model = "Merida Dual Thrust" };
+            Bike sprint1 = new Bike() { ID = 2, BrandID = sprint.ID, Price = 4900, Model = "Sprint Jaguar" };
+            Bike sprint2 = new Bike() { ID = 3, BrandID = sprint.ID, Price = 10000, Model = "Sprint Sirius Tempo" };
+            Bike csepel1 = new Bike() { ID = 4, BrandID = csepel.ID, Price = 6900, Model = "Csepel Budapest A" };
+            Bike csepel2 = new Bike() { ID = 5, BrandID = csepel.ID, Price = 9000, Model = "Csepel Landrider 28 (2020)" };
+            Bike csepel3 = new Bike() { ID = 6, BrandID = csepel.ID, Price = 8000, Model = "Csepel Budapest B" };
+            Bike cross1 = new Bike() { ID = 7, BrandID = cross.ID, Price = 23500, Model = "Cross Picnic" };
+            Bike cross2 = new Bike() { ID = 8, BrandID = cross.ID, Price = 24500, Model = "Cross Citerra" };
+            Bike cross3 = new Bike() { ID = 9, BrandID = cross.ID, Price = 27500, Model = "Cross Riviera" };
+            Bike cross4 = new Bike() { ID = 10, BrandID = cross.ID, Price = 25000, Model = "Cross Avalon" };
 
             Rental rental1 = new Rental() { ID = 1, BikeID = cross2.ID, Renter = "Noelle Bowman", Date = new DateTime(2021, 04, 01)};
             Rental rental2 = new Rental() { ID = 2, BikeID = csepel1.ID, Renter = "Isreal Burch", Date = new DateTime(2021, 06, 01) };
