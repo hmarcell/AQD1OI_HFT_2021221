@@ -14,5 +14,15 @@ namespace AQD1OI_HFT_2021221.Logic
         void Update(Rental rental);
         void Delete(int id);
         IEnumerable<Rental> ReadAll();
+
+        public IEnumerable<string> MostExpensiveBikeRenters();
+        public IEnumerable<KeyValuePair<string, DateTime>> DatesAndRenters(string model);
+        public IEnumerable<KeyValuePair<string, int>> RentalsPerBike();
+        public IEnumerable<KeyValuePair<string, DateTime>> Dates();
+        public IEnumerable<KeyValuePair<string, int?>> EarningsByBikes();
+
+
+
+
     }
 }

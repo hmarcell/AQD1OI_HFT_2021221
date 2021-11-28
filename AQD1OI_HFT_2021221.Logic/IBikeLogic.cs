@@ -14,5 +14,7 @@ namespace AQD1OI_HFT_2021221.Logic
         void Update(Bike bike);
         void Delete(int id);
         IEnumerable<Bike> ReadAll();
+        public IEnumerable<KeyValuePair<string, double?>> AVGPriceByBrands();
+
     }
 }
