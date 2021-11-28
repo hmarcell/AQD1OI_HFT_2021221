@@ -160,8 +160,7 @@ namespace AQD1OI_HFT_2021221.Test
 
        [Test]
        public void EarningsByBikesIsCorrect()
-       {
-            //10000000*2  10000*2
+       { 
             var expected = new List<KeyValuePair<string, int?>>()
                                 {
                                     new KeyValuePair<string, int?>("Merida Dual Thrust", 20000000),
