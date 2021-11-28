@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Models
@@ -18,6 +19,7 @@ namespace AQD1OI_HFT_2021221.Models
         [Required]
         public string Renter { get; set; }          //name of the person who rents the bike
 
+        
         [ForeignKey(nameof(Bike))]
         public int BikeID { get; set; }
 
@@ -25,6 +27,7 @@ namespace AQD1OI_HFT_2021221.Models
         public DateTime Date { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual Bike Bike { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AQD1OI_HFT_2021221.Models
@@ -21,13 +22,16 @@ namespace AQD1OI_HFT_2021221.Models
 
         public int? Price { get; set; }
 
+        
         [ForeignKey(nameof(Brand))]
         public int BrandID { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual Brand Brand { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Rental> Rentals { get; set; }
 
         public Bike()
