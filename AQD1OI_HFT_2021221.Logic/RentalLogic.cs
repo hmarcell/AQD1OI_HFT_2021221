@@ -99,9 +99,10 @@ namespace AQD1OI_HFT_2021221.Logic
             return q;
         }
 
+
         public IEnumerable<KeyValuePair<string,int?>> EarningsByBikes()
         {
-            var q = from x in repo.ReadAll()
+            var q = from x in repo.ReadAll().ToList()
                     group x by x.Bike.Model into g
                     select new KeyValuePair<string, int?>(g.Key, g.Sum(x => x.Bike.Price));
 

@@ -62,7 +62,7 @@ namespace AQD1OI_HFT_2021221.Logic
 
         public IEnumerable<KeyValuePair<string,double?>> AVGPriceByBrands()
         {
-            var q = from x in repo.ReadAll()
+            var q = from x in repo.ReadAll().ToList()
                     group x by x.Brand into g
                     select new KeyValuePair<string, double?>(g.Key.Name, g.Average(x => x.Price));
 
