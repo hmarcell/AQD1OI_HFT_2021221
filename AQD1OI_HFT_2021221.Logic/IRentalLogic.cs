@@ -18,7 +18,7 @@ namespace AQD1OI_HFT_2021221.Logic
         public IEnumerable<string> MostExpensiveBikeRenters();
         public IEnumerable<KeyValuePair<string, DateTime>> DatesAndRenters(string model);
         public IEnumerable<KeyValuePair<string, int>> RentalsPerBike();
-        public IEnumerable<KeyValuePair<string, DateTime>> Dates();
+        public IEnumerable<KeyValuePair<string, DateTime>> ModelsAndDates();
         public IEnumerable<KeyValuePair<string, int?>> EarningsByBikes();
 
 

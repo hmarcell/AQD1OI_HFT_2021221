@@ -45,9 +45,9 @@ namespace AQD1OI_HFT_2021221.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<KeyValuePair<string,DateTime>> Dates()
+        public IEnumerable<KeyValuePair<string,DateTime>> ModelsAndDates()
         {
-            return rl.Dates();
+            return rl.ModelsAndDates();
         }
 
         [HttpGet]

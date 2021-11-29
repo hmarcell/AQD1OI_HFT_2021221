@@ -64,7 +64,7 @@ namespace AQD1OI_HFT_2021221.Logic
 
 
 
-        public IEnumerable<string> MostExpensiveBikeRenters()
+        public IEnumerable<string> MostExpensiveBikeRenters()                                       //Renters of the most expensive bike
         {
 
             int? maxPrice = repo.ReadAll().Max(x => x.Bike.Price);
@@ -75,10 +75,10 @@ namespace AQD1OI_HFT_2021221.Logic
 
             return renters;
         }
-        public IEnumerable<KeyValuePair<string,DateTime>> DatesAndRenters(string model)
+        public IEnumerable<KeyValuePair<string,DateTime>> DatesAndRenters(string model)             //Rental dates and renters of a specific bike model
         {
             var q = from x in repo.ReadAll()
-                    where x.Bike.Model == model
+                    where x.Bike.Model.ToLower() == model.ToLower()
                     select new KeyValuePair<string, DateTime>(x.Renter, x.Date);
             return q;
         }
@@ -92,7 +92,7 @@ namespace AQD1OI_HFT_2021221.Logic
             return q;
         }
 
-        public IEnumerable<KeyValuePair<string,DateTime>> Dates()
+        public IEnumerable<KeyValuePair<string,DateTime>> ModelsAndDates()                       //Bike models and dates of each rental
         {
             var q = from x in repo.ReadAll()
                     select new KeyValuePair<string, DateTime>(x.Bike.Model, x.Date);
