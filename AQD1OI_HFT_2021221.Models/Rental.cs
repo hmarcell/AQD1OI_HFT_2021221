@@ -29,5 +29,9 @@ namespace AQD1OI_HFT_2021221.Models
         [NotMapped]
         [JsonIgnore]
         public virtual Bike Bike { get; set; }
+        public override string ToString()
+        {
+            return $"{ID}. Renter: {Renter} BikeId: {BikeID} Rental date: {Date}";
+        }
     }
 }

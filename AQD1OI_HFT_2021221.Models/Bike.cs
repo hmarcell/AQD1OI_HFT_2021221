@@ -38,5 +38,9 @@ namespace AQD1OI_HFT_2021221.Models
         {
             Rentals = new HashSet<Rental>();
         }
+        public override string ToString()
+        {
+            return $"{ID}. {Model}, Price: {Price}, Brand ID: {BrandID}";
+        }
     }
 }

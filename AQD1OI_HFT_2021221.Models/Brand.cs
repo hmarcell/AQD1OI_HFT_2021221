@@ -27,5 +27,9 @@ namespace AQD1OI_HFT_2021221.Models
         {
             Bikes = new HashSet<Bike>();
         }
+        public override string ToString()
+        {
+            return $"{ID}. {Name}";
+        }
     }
 }
