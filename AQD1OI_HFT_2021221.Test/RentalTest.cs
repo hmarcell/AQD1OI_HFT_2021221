@@ -143,7 +143,7 @@ namespace AQD1OI_HFT_2021221.Test
                                 new KeyValuePair<string, DateTime>("Merida Dual Thrust", new DateTime(2021,11,10)),
                                 new KeyValuePair<string, DateTime>("Csepel X2", new DateTime(2021,11,15))
                            };
-            Assert.That(rl.Dates(), Is.EquivalentTo(expected));
+            Assert.That(rl.ModelsAndDates(), Is.EquivalentTo(expected));
        }
 
        [TestCase("Merida Dual Thrust")]
