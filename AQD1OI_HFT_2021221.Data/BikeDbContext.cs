@@ -40,19 +40,19 @@ namespace AQD1OI_HFT_2021221.Data
                 .HasOne(b => b.Brand)
                 .WithMany(b => b.Bikes)
                 .HasForeignKey(b => b.BrandID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Rental>()
                 .HasOne(r => r.Bike)
                 .WithMany(b => b.Rentals)
                 .HasForeignKey(r => r.BikeID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             DbSeeding(modelBuilder);
 
         }
 
-        private void DbSeeding(ModelBuilder modelBuilder)               //TODO
+        private void DbSeeding(ModelBuilder modelBuilder)              
         {
             Brand csepel = new Brand() { ID = 1, Name = "Csepel" };
             Brand merida = new Brand() { ID = 2, Name = "Merida" };
