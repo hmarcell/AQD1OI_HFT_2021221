@@ -11,6 +11,7 @@ using AQD1OI_HFT_2021221.Logic;
 using AQD1OI_HFT_2021221.Repository;
 using AQD1OI_HFT_2021221.Data;
 using System.Text.Json.Serialization;
+using AQD1OI_HFT_2021221.Endpoint.Services;
 
 namespace AQD1OI_HFT_2021221.Endpoint
 {
@@ -28,6 +29,8 @@ namespace AQD1OI_HFT_2021221.Endpoint
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IRentalRepository, RentalRepository>();
             services.AddTransient<BikeDbContext, BikeDbContext>();
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +46,7 @@ namespace AQD1OI_HFT_2021221.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

@@ -22,7 +22,7 @@ namespace AQD1OI_HFT_2021221.Models
 
         public int? Price { get; set; }
 
-        
+
         [ForeignKey(nameof(Brand))]
         public int BrandID { get; set; }
 

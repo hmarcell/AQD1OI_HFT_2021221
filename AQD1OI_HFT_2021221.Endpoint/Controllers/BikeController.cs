@@ -1,7 +1,9 @@
-﻿using AQD1OI_HFT_2021221.Logic;
+﻿using AQD1OI_HFT_2021221.Endpoint.Services;
+using AQD1OI_HFT_2021221.Logic;
 using AQD1OI_HFT_2021221.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,12 @@ namespace AQD1OI_HFT_2021221.Endpoint.Controllers
     {
         IBikeLogic bl;
 
-        public BikeController(IBikeLogic bl)
+        IHubContext<SignalRHub> hub;
+        
+        public BikeController(IBikeLogic bl, IHubContext<SignalRHub> hub)
         {
             this.bl = bl;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -36,18 +41,22 @@ namespace AQD1OI_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Bike bike)
         {
             bl.Create(bike);
+            this.hub.Clients.All.SendAsync("BikeCreated", bike);
         }
-        
+
         [HttpPut]
         public void Put([FromBody] Bike bike)
         {
             bl.Update(bike);
+            this.hub.Clients.All.SendAsync("BikeUpdated", bike);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var bikeToDelete = bl.Read(id);
             bl.Delete(id);
+            this.hub.Clients.All.SendAsync("BikeDeleted", bikeToDelete);
         }
 
     }
