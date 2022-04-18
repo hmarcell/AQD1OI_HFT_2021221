@@ -16,9 +16,19 @@ namespace AQD1OI_HFT_2021221.WpfClient
     {
         public ICommand CreateBikeCommand { get; set; }
         public ICommand DeleteBikeCommand { get; set; }
-        public ICommand UpdateBikeCommand { get; set; }
+        public ICommand UpdateBikeCommand { get; set; } 
+        public ICommand CreateBrandCommand { get; set; }
+        public ICommand DeleteBrandCommand { get; set; }
+        public ICommand UpdateBrandCommand { get; set; }
+        public ICommand CreateRentalCommand { get; set; }
+        public ICommand DeleteRentalCommand { get; set; }
+        public ICommand UpdateRentalCommand { get; set; }
         public RestCollection<Bike> Bikes { get; set; }
+        public RestCollection<Brand> Brands { get; set; }
+        public RestCollection<Rental> Rentals { get; set; }
         private Bike selectedBike;
+        private Brand selectedBrand;
+        private Rental selectedRental;
 
         public static bool IsInDesignMode
         { 
@@ -40,42 +50,121 @@ namespace AQD1OI_HFT_2021221.WpfClient
                     {
                         Model = value.Model,
                         ID = value.ID,
-                        BrandID = value.BrandID
+                        BrandID = value.BrandID,
+                        Price = value.Price
                     };
                     OnPropertyChanged();
                     (DeleteBikeCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
         }
+        public Brand SelectedBrand
+        {
+            get { return selectedBrand; }
+            set
+            {
+                if (value != null)
+                {
+                    selectedBrand = new Brand()
+                    {
+                        ID = value.ID,
+                        Name = value.Name
+                    };
+                    OnPropertyChanged();
+                    (DeleteBrandCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+            }
+        }
+        public Rental SelectedRental
+        {
+            get { return selectedRental; }
+            set
+            {
+                if (value != null)
+                {
+                    selectedRental = new Rental()
+                    {
+                        ID = value.ID,
+                        Date = value.Date,
+                        Renter = value.Renter,
+                        BikeID = value.BikeID
+                        
+                    };
+                    OnPropertyChanged();
+                    (DeleteRentalCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+            }
+        }
 
+
+        public void SetupCommands()
+        {
+            CreateBikeCommand = new RelayCommand(() =>
+            {
+                Bikes.Add(new Bike() { Model = SelectedBike.Model, BrandID = SelectedBike.BrandID, Price = SelectedBike.Price });      //TODO: jol mukodo create/update
+            });
+            UpdateBikeCommand = new RelayCommand(() =>
+            {
+                Bikes.Update(SelectedBike);
+            });
+            DeleteBikeCommand = new RelayCommand(() =>
+            {
+                Bikes.Delete(SelectedBike.ID);
+            },
+            () =>
+            {
+                return SelectedBike != null;
+            });
+
+            CreateBrandCommand = new RelayCommand(() =>
+            {
+                Brands.Add(new Brand() { Name = SelectedBrand.Name });
+            });
+            UpdateBrandCommand = new RelayCommand(() =>
+            {
+                Brands.Update(SelectedBrand);
+            });
+            DeleteBrandCommand = new RelayCommand(() =>
+            {
+                Brands.Delete(SelectedBrand.ID);
+            },
+            () =>
+            {
+                return SelectedBrand != null;
+            });
+
+            CreateRentalCommand = new RelayCommand(() =>
+            {
+                Rentals.Add(new Rental() { Renter = SelectedRental.Renter, Date = SelectedRental.Date, BikeID = SelectedRental.BikeID });
+            });
+            UpdateRentalCommand = new RelayCommand(() =>
+            {
+                Rentals.Update(SelectedRental);
+            });
+            DeleteRentalCommand = new RelayCommand(() =>
+            {
+                Rentals.Delete(SelectedRental.ID);
+            },
+            () =>
+            {
+                return SelectedRental != null;
+            });
+
+        }
 
         public MainWindowViewModel()
         {
             if (!IsInDesignMode)
             {
                 Bikes = new RestCollection<Bike>("http://localhost:7293/", "bike", "hub");
+                Brands = new RestCollection<Brand>("http://localhost:7293/", "brand", "hub");
+                Rentals = new RestCollection<Rental>("http://localhost:7293/", "rental", "hub");
 
-                CreateBikeCommand = new RelayCommand(() =>
-                {
-                    //Bikes.Add(new Bike() { BrandID = 4, Price = 25000, Model = "Cross Avalon" });
-                    Bikes.Add(new Bike() { Model = SelectedBike.Model, BrandID = 1 });
-                });
+                SetupCommands();
 
-
-                UpdateBikeCommand = new RelayCommand(() =>
-                {
-                    Bikes.Update(SelectedBike);
-                });
-
-                DeleteBikeCommand = new RelayCommand(() =>
-                {
-                    Bikes.Delete(SelectedBike.ID);
-                },
-                () =>
-                {
-                    return SelectedBike != null;
-                });
-            SelectedBike = new Bike();
+                SelectedBrand = new Brand();
+                SelectedBike = new Bike();
+                SelectedRental = new Rental();
             }
         }
     }
