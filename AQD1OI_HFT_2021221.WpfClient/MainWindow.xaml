@@ -26,7 +26,7 @@
                     </ListBox>
                     <StackPanel Grid.Column="1">
                         <Label Content="Bike ID" Background="LightBlue" Padding="5"/>
-                        <TextBox Text="{Binding SelectedBike.ID}" Padding="5"/>
+                        <TextBox Text="{Binding SelectedBike.ID}" IsEnabled="False" Padding="5"/>
                         <Label Content="Model" Background="LightBlue" Padding="5"/>
                         <TextBox Text="{Binding SelectedBike.Model}" Padding="5"/>
                         <Label Content="Price" Background="LightBlue" Padding="5"/>
@@ -55,7 +55,7 @@
                     </ListBox>
                     <StackPanel Grid.Column="1">
                         <Label Content="Brand ID" Background="LightBlue" Padding="5"/>
-                        <TextBox Text="{Binding SelectedBrand.ID}" Padding="5"/>
+                        <TextBox Text="{Binding SelectedBrand.ID}" IsEnabled="False" Padding="5"/>
                         <Label Content="Name" Background="LightBlue" Padding="5"/>
                         <TextBox Text="{Binding SelectedBrand.Name}" Padding="5" Margin="0,0,0,50"/>
                         <Button Content="Create Brand" Command="{Binding CreateBrandCommand}" Margin="10" Padding="10"/>
@@ -80,7 +80,7 @@
                     </ListBox>
                     <StackPanel Grid.Column="1">
                         <Label Content="Rental ID" Background="LightBlue" Padding="5"/>
-                        <TextBox Text="{Binding SelectedRental.ID}" Padding="5" />
+                        <TextBox Text="{Binding SelectedRental.ID}" IsEnabled="False" Padding="5" />
                         <Label Content="Renter" Background="LightBlue" Padding="5"/>
                         <TextBox Text="{Binding SelectedRental.Renter}" Padding="5" />
                         <Label Content="Date" Background="LightBlue" Padding="5"/>
@@ -92,9 +92,6 @@
                         <Button Content="Delete Rental" Command="{Binding DeleteRentalCommand}" Margin="10" Padding="10"/>
                     </StackPanel>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Filters">
-                
             </TabItem>
         </TabControl>
     </Grid>

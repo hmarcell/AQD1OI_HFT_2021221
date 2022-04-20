@@ -97,11 +97,17 @@ namespace AQD1OI_HFT_2021221.WpfClient
         }
 
 
+        public void SetupCollections()
+        {
+            Bikes = new RestCollection<Bike>("http://localhost:7293/", "bike", "hub");
+            Brands = new RestCollection<Brand>("http://localhost:7293/", "brand", "hub");
+            Rentals = new RestCollection<Rental>("http://localhost:7293/", "rental", "hub");
+        }
         public void SetupCommands()
         {
             CreateBikeCommand = new RelayCommand(() =>
             {
-                Bikes.Add(new Bike() { Model = SelectedBike.Model, BrandID = SelectedBike.BrandID, Price = SelectedBike.Price });      //TODO: jol mukodo create/update
+                Bikes.Add(new Bike() { Model = SelectedBike.Model, BrandID = SelectedBike.BrandID, Price = SelectedBike.Price });
             });
             UpdateBikeCommand = new RelayCommand(() =>
             {
@@ -156,10 +162,7 @@ namespace AQD1OI_HFT_2021221.WpfClient
         {
             if (!IsInDesignMode)
             {
-                Bikes = new RestCollection<Bike>("http://localhost:7293/", "bike", "hub");
-                Brands = new RestCollection<Brand>("http://localhost:7293/", "brand", "hub");
-                Rentals = new RestCollection<Rental>("http://localhost:7293/", "rental", "hub");
-
+                SetupCollections();
                 SetupCommands();
 
                 SelectedBrand = new Brand();
