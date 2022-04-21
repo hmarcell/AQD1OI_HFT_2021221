@@ -17,7 +17,13 @@ namespace AQD1OI_HFT_2021221.Data
 
         public BikeDbContext()
         {
-            this.Database.EnsureCreated();
+            try
+            {
+                this.Database.EnsureCreated();
+            }
+            catch (Exception)
+            { 
+            }
         }
 
         public virtual DbSet<Bike> Bikes { get; set; }
