@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Brand UI</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <h1>Catalog</h1>
+    <button type="button" onclick="showbrands()">Brands</button>
+    <button type="button" onclick="showrentals()">Rentals</button>
+    <button type="button" onclick="showbikes()">Bikes</button>
+
+    <div id="brands" style="display:none">
+        <div id="brandformdiv">
+            <label>Brand Name</label>
+            <input type="text" id="brandname" />
+            <button type="button" onclick="brandcreate()">Add Brand</button>
+        </div>
+        <br />
+        <div id="brandupdateformdiv">
+            <label>Brand Name</label>
+            <input type="text" id="brandnametoupdate" />
+            <button type="button" onclick="brandupdate()">Update Brand</button>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="brandresultarea">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="bikes" style="display:none">
+        <div id="bikeformdiv">
+            <label>Bike Model</label>
+            <input type="text" id="bikemodel" />
+            <button type="button" onclick="bikecreate()">Add Bike</button>
+        </div>
+        <br />
+        <div id="bikeupdateformdiv">
+            <label>Bike Model</label>
+            <input type="text" id="bikemodeltoupdate" />
+            <button type="button" onclick="bikeupdate()">Update Bike</button>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Model</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bikeresultarea">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="rentals" style="display:none">
+        <div id="bikeformdiv">
+            <label>Bike Model</label>
+            <input type="text" id="bikemodel" />
+            <button type="button" onclick="bikecreate()">Add Bike</button>
+        </div>
+        <br />
+        <div id="bikeupdateformdiv">
+            <label>Bike Model</label>
+            <input type="text" id="bikemodeltoupdate" />
+            <button type="button" onclick="bikeupdate()">Update Bike</button>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Model</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bikeresultarea">
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
