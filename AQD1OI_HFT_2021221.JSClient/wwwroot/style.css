@@ -49,6 +49,63 @@ table button {
         padding: 7px;
     }
 
-    #brandupdateformdiv label {
+    #brandsupdateformdiv label {
+        font-weight: bolder;
+    }
+
+#bikeformdiv {
+    display: flex;
+    flex-direction: column;
+}
+
+    #bikeformdiv label, button, input {
+        margin: 10px;
+
+    }
+
+    #bikeformdiv label {
+        font-weight: bolder;
+    }
+
+#bikeupdateformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #bikeupdateformdiv label, button, input {
+        margin: 10px;
+        padding: 7px;
+    }
+
+    #bikeupdateformdiv label {
+        font-weight: bolder;
+    }
+
+#rentalformdiv {
+    display: flex;
+    flex-direction: column;
+}
+
+    #rentalformdiv label, button, input {
+        margin: 10px;
+    }
+
+    #rentalformdiv label {
+        font-weight: bolder;
+    }
+
+#rentalupdateformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #rentalupdateformdiv label, button, input {
+        margin: 10px;
+        padding: 7px;
+    }
+
+    #rentalupdateformdiv label {
         font-weight: bolder;
     }

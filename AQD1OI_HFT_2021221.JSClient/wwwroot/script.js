@@ -1,6 +1,10 @@
 ﻿let brands = [];
+let bikes = [];
+let rentals = [];
 let connection;
 getbranddata();
+getbikedata();
+getrentaldata();
 setupSignalR();
 let brandIdToUpdate = -1;
 
@@ -77,7 +81,25 @@ async function getbranddata() {
         .then(x => x.json())
         .then(y => {
             brands = y;
-            display();
+            branddisplay();
+        });
+}
+
+async function getbikedata() {
+    await fetch('http://localhost:7293/bike')
+        .then(x => x.json())
+        .then(y => {
+            bikes = y;
+            bikedisplay();
+        });
+}
+
+async function getrentaldata() {
+    await fetch('http://localhost:7293/rental')
+        .then(x => x.json())
+        .then(y => {
+            rentals = y;
+            rentaldisplay();
         });
 }
 
@@ -85,7 +107,7 @@ async function getbranddata() {
 
 
 
-function display() {
+function branddisplay() {
     document.getElementById('brandresultarea').innerHTML = "";
     brands.forEach(t => {
         document.getElementById("brandresultarea").innerHTML
@@ -95,11 +117,44 @@ function display() {
             + `<button type="button" onclick="brandremove(${t.id})">Delete</button>`
             + `<button type="button" onclick="brandshowupdate(${t.id})">Update</button>`
             + "</td></tr>";
-        console.log(t.name);
     });
 }
 
-function brandremove(id) {;
+function bikedisplay() {
+    document.getElementById('bikeresultarea').innerHTML = "";
+    bikes.forEach(t => {
+        document.getElementById("bikeresultarea").innerHTML
+            += "<tr><td>" + t.id + "</td><td>"
+            + t.model
+            + "</td><td>"
+            + t.price
+            + "</td><td>"
+            + t.brandID
+            + "</td><td>"
+            + `<button type="button" onclick="bikeremove(${t.id})">Delete</button>`
+            + `<button type="button" onclick="bikeshowupdate(${t.id})">Update</button>`
+            + "</td></tr>";
+    });
+}
+
+function rentaldisplay() {
+    document.getElementById('rentalresultarea').innerHTML = "";
+    rentals.forEach(t => {
+        document.getElementById("rentalresultarea").innerHTML
+            += "<tr><td>" + t.id + "</td><td>"
+            + t.renter
+            + "</td><td>"
+            + t.bikeID
+            + "</td><td>"
+            + t.date
+            + "</td><td>"
+            + `<button type="button" onclick="rentalremove(${t.id})">Delete</button>`
+            + `<button type="button" onclick="rentalshowupdate(${t.id})">Update</button>`
+            + "</td></tr>";
+    });
+}
+
+function brandremove(id) {
     fetch('http://localhost:7293/brand/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', },
@@ -113,6 +168,35 @@ function brandremove(id) {;
         .catch((error) => { console.error('Error:', error); });
 }
 
+function bikeremove(id) {
+    fetch('http://localhost:7293/bike/' + id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', },
+        body: null
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getbranddata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function rentalremove(id) {
+    fetch('http://localhost:7293/rental/' + id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', },
+        body: null
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getbranddata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+
 function brandcreate() {
     let brandname = document.getElementById('brandname').value;
     fetch('http://localhost:7293/brand', {
@@ -125,6 +209,52 @@ function brandcreate() {
         .then(response => response)
         .then(data =>
         {
+            console.log('Success:', data);
+            getbranddata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function bikecreate() {
+    let bikemodel = document.getElementById('bikemodel').value;
+    let bikeprice = document.getElementById('bikeprice').value;
+    let bikebrandid = document.getElementById('bikebrandid').value;
+    fetch('http://localhost:7293/bike', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            {
+                model: bikemodel,
+                price: bikeprice,
+                brandID: bikebrandid
+            }
+        ),
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getbranddata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function rentalcreate() {
+    let renter = document.getElementById('rentalrenter').value;
+    let bikeid = document.getElementById('rentalbikeid').value;
+    let date = document.getElementById('rentaldate').value;
+    fetch('http://localhost:7293/rental', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            {
+                renter: renter,
+                bikeID: bikeid,
+                date: date
+            }
+        ),
+    })
+        .then(response => response)
+        .then(data => {
             console.log('Success:', data);
             getbranddata();
         })
@@ -147,6 +277,48 @@ function brandupdate() {
         })
         .catch((error) => { console.error('Error:', error); });
     document.getElementById('brandupdateformdiv').style.display = 'none';
+
+}
+
+function bikeupdate() {
+    let bikemodel = document.getElementById('bikemodelupdate').value;
+    let bikeprice = document.getElementById('bikepriceupdate').value;
+    let bikebrandid = document.getElementById('bikebrandidupdate').value;
+    fetch('http://localhost:7293/bike', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            { name: brandname, id: brandIdToUpdate }
+        ),
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getbranddata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+    document.getElementById('bikeupdateformdiv').style.display = 'none';
+
+}
+
+function rentalupdate() {
+    let renter = document.getElementById('rentalrenterupdate').value;
+    let bikeid = document.getElementById('rentalbikeidupdate').value;
+    let date = document.getElementById('rentaldateupdate').value;
+    fetch('http://localhost:7293/rental', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            { name: brandname, id: brandIdToUpdate }
+        ),
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getbranddata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+    document.getElementById('rentalupdateformdiv').style.display = 'none';
 
 }
 
