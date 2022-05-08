@@ -7,6 +7,8 @@ getbikedata();
 getrentaldata();
 setupSignalR();
 let brandIdToUpdate = -1;
+let bikeIdToUpdate = -1;
+let rentalIdToUpdate = -1;
 
 function setupSignalR() {
     connection = new signalR.HubConnectionBuilder()
@@ -24,22 +26,22 @@ function setupSignalR() {
         getbranddata();
     });
     connection.on("RentalCreated", (user, message) => {
-        getbranddata();
+        getrentaldata();
     });
     connection.on("RentalDeleted", (user, message) => {
-        getbranddata();
+        getrentaldata();
     });
     connection.on("RentalUpdated", (user, message) => {
-        getbranddata();
+        getrentaldata();
     });
     connection.on("BikeCreated", (user, message) => {
-        getbranddata();
+        getbikedata();
     });
     connection.on("BikeDeleted", (user, message) => {
-        getbranddata();
+        getbikedata();
     });
     connection.on("BikeUpdated", (user, message) => {
-        getbranddata();
+        getbikedata();
     });
 
     connection.onclose(async () => {
@@ -177,7 +179,7 @@ function bikeremove(id) {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getbranddata();
+            getbikedata();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -191,7 +193,7 @@ function rentalremove(id) {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getbranddata();
+            getrentaldata();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -233,7 +235,7 @@ function bikecreate() {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getbranddata();
+            getbikedata();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -256,7 +258,7 @@ function rentalcreate() {
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getbranddata();
+            getrentaldata();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -281,20 +283,25 @@ function brandupdate() {
 }
 
 function bikeupdate() {
-    let bikemodel = document.getElementById('bikemodelupdate').value;
-    let bikeprice = document.getElementById('bikepriceupdate').value;
-    let bikebrandid = document.getElementById('bikebrandidupdate').value;
+    let bikemodel = document.getElementById('bikemodeltoupdate').value;
+    let bikeprice = document.getElementById('bikepricetoupdate').value;
+    let bikebrandid = document.getElementById('bikebrandIDtoupdate').value;
     fetch('http://localhost:7293/bike', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: brandname, id: brandIdToUpdate }
+            {
+                model: bikemodel,
+                price: bikeprice,
+                brandID: bikebrandid,
+                id: bikeIdToUpdate
+            }
         ),
     })
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getbranddata();
+            getbikedata();
         })
         .catch((error) => { console.error('Error:', error); });
     document.getElementById('bikeupdateformdiv').style.display = 'none';
@@ -302,20 +309,25 @@ function bikeupdate() {
 }
 
 function rentalupdate() {
-    let renter = document.getElementById('rentalrenterupdate').value;
-    let bikeid = document.getElementById('rentalbikeidupdate').value;
-    let date = document.getElementById('rentaldateupdate').value;
+    let renter = document.getElementById('rentalrentertoupdate').value;
+    let bikeid = document.getElementById('rentalbikeIDtoupdate').value;
+    let date = document.getElementById('rentaldatetoupdate').value;
     fetch('http://localhost:7293/rental', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: brandname, id: brandIdToUpdate }
+            {
+                renter: renter,
+                date: date,
+                bikeID: bikeid,
+                id: rentalIdToUpdate
+            }
         ),
     })
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
-            getbranddata();
+            getrentaldata();
         })
         .catch((error) => { console.error('Error:', error); });
     document.getElementById('rentalupdateformdiv').style.display = 'none';
@@ -326,4 +338,22 @@ function brandshowupdate(id) {
     document.getElementById('brandnametoupdate').value = brands.find(t => t['id'] == id)['name'];
     document.getElementById('brandupdateformdiv').style.display = 'flex';
     brandIdToUpdate = id;
+}
+
+function bikeshowupdate(id) {
+    let bike = bikes.find(x => x['id'] == id);
+    document.getElementById('bikemodeltoupdate').value = bike['model'];
+    document.getElementById('bikepricetoupdate').value = bike['price'];
+    document.getElementById('bikebrandIDtoupdate').value = bike['brandID'];
+    document.getElementById('bikeupdateformdiv').style.display = 'flex';
+    bikeIdToUpdate = id;
+}
+
+function rentalshowupdate(id) {
+    let rental = rentals.find(x => x['id'] == id);
+    document.getElementById('rentalrentertoupdate').value = rental['renter'];
+    document.getElementById('rentaldatetoupdate').value = rental['date'];
+    document.getElementById('rentalbikeIDtoupdate').value = rental['bikeID'];
+    document.getElementById('rentalupdateformdiv').style.display = 'flex';
+    rentalIdToUpdate = id;
 }
